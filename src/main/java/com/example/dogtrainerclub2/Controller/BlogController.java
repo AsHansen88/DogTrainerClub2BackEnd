@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,8 @@ public class BlogController {
 
   @PostMapping(value = "/post")
   public void publishPosts(@RequestBody PostModel post){
+    if (post.getDateCreated() == null)
+    post.setDateCreated(new Date());
     postService.insertPost(post);
 
   }
