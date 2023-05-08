@@ -39,14 +39,14 @@ public class ImageDataService {
     return ImageModel.builder()
         .name(dbImage.get().getName())
         .type(dbImage.get().getType())
-        .imageData(ImageUtil.decompressImage(dbImage.get().getImageData())).build();
+        .image_data(ImageUtil.decompressImage(dbImage.get().getImage_data())).build();
 
   }
 
   @Transactional
   public byte[] getImage(String name) {
     Optional<ImageModel> dbImage = imageDataRepository.findByName(name);
-    byte[] image = ImageUtil.decompressImage(dbImage.get().getImageData());
+    byte[] image = ImageUtil.decompressImage(dbImage.get().getImage_data());
     return image;
   }
 }

@@ -26,7 +26,7 @@ public class ImageModel {
 
   private byte[] image_data;
 
-  public ImageModel(Long id, String name, String type, byte[] imageData) {
+  public ImageModel(Long id, String name, String type, byte[] image_data) {
     this.id = id;
     this.name = name;
     this.type = type;
