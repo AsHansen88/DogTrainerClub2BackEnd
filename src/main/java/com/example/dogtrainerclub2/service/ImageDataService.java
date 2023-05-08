@@ -4,6 +4,7 @@ import com.example.dogtrainerclub2.Util.ImageUtil;
 import com.example.dogtrainerclub2.exception.ImageUploadResponse;
 import com.example.dogtrainerclub2.model.ImageModel;
 import com.example.dogtrainerclub2.repository.ImageDataRepository;
+
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ImageDataService {
     imageDataRepository.save(ImageModel.builder()
         .name(file.getOriginalFilename())
         .type(file.getContentType())
-        .imageData(ImageUtil.compressImage(file.getBytes())).build());
+        .image_data(ImageUtil.compressImage(file.getBytes())).build());
 
     return new ImageUploadResponse("Image uploaded successfully: " +
         file.getOriginalFilename());

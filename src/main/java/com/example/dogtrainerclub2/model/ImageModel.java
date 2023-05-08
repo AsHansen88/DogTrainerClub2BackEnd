@@ -1,9 +1,10 @@
 package com.example.dogtrainerclub2.model;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import jakarta.persistence.*;
 import lombok.Builder;
+
 
 import java.util.Arrays;
 
@@ -23,19 +24,19 @@ public class ImageModel {
   @Lob
   @Column(name = "image_data", length = 1000)
 
-  private byte[] imageData;
+  private byte[] image_data;
 
   public ImageModel(Long id, String name, String type, byte[] imageData) {
     this.id = id;
     this.name = name;
     this.type = type;
-    this.imageData = imageData;
+    this.image_data = image_data;
   }
-/*
+
 public ImageModel(){
 
 }
-*/
+
   public Long getId() {
     return id;
   }
@@ -60,12 +61,12 @@ public ImageModel(){
     this.type = type;
   }
 
-  public byte[] getImageData() {
-    return imageData;
+  public byte[] getImage_data() {
+    return image_data;
   }
 
-  public void setImageData(byte[] imageData) {
-    this.imageData = imageData;
+  public void setImage_data(byte[] image_data) {
+    this.image_data = image_data;
   }
 
   @Override
@@ -74,7 +75,7 @@ public ImageModel(){
         "id=" + id +
         ", name='" + name + '\'' +
         ", type='" + type + '\'' +
-        ", imageData=" + Arrays.toString(imageData) +
+        ", imageData=" + Arrays.toString(image_data) +
         '}';
   }
 }
