@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin("http://localhost:63342")
 public class FileController {
 
   @Autowired
