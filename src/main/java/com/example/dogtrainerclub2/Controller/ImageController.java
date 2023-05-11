@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin("http://localhost:63342")
 @RequestMapping("/image")
 public class ImageController {
 

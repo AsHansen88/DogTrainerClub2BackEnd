@@ -18,7 +18,7 @@ public class FileStorageService {
   @Autowired
   private FileDBRepository fileDBRepository;
 
-  private Path root = Paths.get("upload");
+  private Path root = Paths.get("files");
 
   public FileDB store(MultipartFile file) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -38,9 +38,22 @@ public class FileStorageService {
 
   public boolean delete(String fileName) {
     try {
-      Path dfile = root.resolve(fileName);
-      return Files.deleteIfExists(dfile);
-    } catch (IOException e) {
+      boolean found = fileDBRepository.existsById(fileName);
+
+      fileDBRepository.deleteById(fileName);
+
+      found = fileDBRepository.existsById(fileName);
+      if (!found)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+     /* Path dfile = root.resolve(fileName);
+      return Files.deleteIfExists(dfile);*/
+    } catch (Exception e) {
       throw new RuntimeException("Error: " + e.getMessage());
     }
   }

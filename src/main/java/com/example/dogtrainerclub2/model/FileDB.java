@@ -7,11 +7,12 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "files")
 public class FileDB {
-  @Id
+
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
 
+  @Id
   private String name;
 
   private String type;
