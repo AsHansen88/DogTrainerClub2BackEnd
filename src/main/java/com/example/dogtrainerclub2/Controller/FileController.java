@@ -12,9 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 
 @Controller
@@ -23,6 +23,7 @@ public class FileController {
 
   @Autowired
   private FileStorageService storageService;
+
 
   @PostMapping("/upload")
   public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
@@ -65,4 +66,34 @@ public class FileController {
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
         .body(fileDB.getData());
   }
+
+// Delete file
+
+
+  @DeleteMapping ("/files/{fileName:.+}")
+
+   public ResponseEntity<ResponseMessage> deleteFile(@PathVariable String fileName)  {
+    String message = "";
+
+    try {
+      boolean existed = storageService.delete(fileName);
+
+      if (existed) {
+        message = "Delete the file successfully: " + fileName;
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
+      }
+
+      message = "The file does not exist!";
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage(message));
+    } catch (Exception e) {
+      message = "Could not delete the file: " + fileName + ". Error: " + e.getMessage();
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseMessage(message));
+    }
+  }
 }
+
+
+
+
+
+
