@@ -4,7 +4,6 @@ package com.example.dogtrainerclub2.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
-import lombok.Data;
 
 
 import java.util.Arrays;
@@ -12,14 +11,12 @@ import java.util.Arrays;
 @Entity
 @Table(name = "image_data")
 @Builder
-@Data
 public class ImageModel {
 
 
-
+  @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Id
   private String name;
   private String type;
 
