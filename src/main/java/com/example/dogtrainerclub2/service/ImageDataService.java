@@ -9,7 +9,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -18,7 +17,6 @@ public class ImageDataService {
 
   @Autowired
   private ImageDataRepository imageDataRepository;
-
 
   public ImageUploadResponse uploadImage(MultipartFile file) throws IOException {
 
@@ -49,6 +47,10 @@ public class ImageDataService {
     byte[] image = ImageUtil.decompressImage(dbImage.get().getImage_data());
     return image;
   }
+
 }
+
+
+
 
 

@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 @Service
@@ -18,9 +15,7 @@ public class FileStorageService {
   @Autowired
   private FileDBRepository fileDBRepository;
 
-  private Path root = Paths.get("files");
-
-  public FileDB store(MultipartFile file) throws IOException {
+    public FileDB store(MultipartFile file) throws IOException {
     String fileName = StringUtils.cleanPath(file.getOriginalFilename());
     FileDB FileDB = new FileDB(fileName, file.getContentType(), file.getBytes());
 
@@ -51,8 +46,7 @@ public class FileStorageService {
       {
         return false;
       }
-     /* Path dfile = root.resolve(fileName);
-      return Files.deleteIfExists(dfile);*/
+
     } catch (Exception e) {
       throw new RuntimeException("Error: " + e.getMessage());
     }
