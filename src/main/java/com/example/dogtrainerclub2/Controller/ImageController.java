@@ -2,6 +2,7 @@ package com.example.dogtrainerclub2.Controller;
 
 import com.example.dogtrainerclub2.exception.ImageUploadResponse;
 import com.example.dogtrainerclub2.model.ImageModel;
+import com.example.dogtrainerclub2.repository.ImageDataRepository;
 import com.example.dogtrainerclub2.service.ImageDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
+
 
 @RestController
 @CrossOrigin("http://localhost:63342")
@@ -19,6 +20,8 @@ public class ImageController {
 
   @Autowired
   private ImageDataService imageDataService;
+  private ImageDataRepository imageDataRepository;
+
 
   @PostMapping
   public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
@@ -29,7 +32,7 @@ public class ImageController {
   }
 
   @GetMapping("/info/{name}")
-  public ResponseEntity<?>  getImageInfoByName(@PathVariable("name") String name){
+  public ResponseEntity<?> getImageInfoByName(@PathVariable("name") String name) {
     ImageModel image = imageDataService.getInfoByImageByName(name);
 
     return ResponseEntity.status(HttpStatus.OK)
@@ -37,11 +40,12 @@ public class ImageController {
   }
 
   @GetMapping("/{name}")
-  public ResponseEntity<?>  getImageByName(@PathVariable("name") String name){
+  public ResponseEntity<?> getImageByName(@PathVariable("name") String name) {
     byte[] image = imageDataService.getImage(name);
 
     return ResponseEntity.status(HttpStatus.OK)
         .contentType(MediaType.valueOf("image/png"))
         .body(image);
   }
+
 }

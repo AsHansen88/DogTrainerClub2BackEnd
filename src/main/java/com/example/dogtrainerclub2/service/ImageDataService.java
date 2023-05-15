@@ -4,7 +4,6 @@ import com.example.dogtrainerclub2.Util.ImageUtil;
 import com.example.dogtrainerclub2.exception.ImageUploadResponse;
 import com.example.dogtrainerclub2.model.ImageModel;
 import com.example.dogtrainerclub2.repository.ImageDataRepository;
-
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +46,7 @@ public class ImageDataService {
     byte[] image = ImageUtil.decompressImage(dbImage.get().getImage_data());
     return image;
   }
+
 
 }
 

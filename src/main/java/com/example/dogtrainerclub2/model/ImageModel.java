@@ -5,7 +5,6 @@ package com.example.dogtrainerclub2.model;
 import jakarta.persistence.*;
 import lombok.Builder;
 
-
 import java.util.Arrays;
 
 @Entity
