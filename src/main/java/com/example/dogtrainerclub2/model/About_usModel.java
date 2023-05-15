@@ -21,11 +21,13 @@ public class About_usModel {
   @Column(name = "photo")
   private String photo;
 
-  public About_usModel(Long id, String firstname, String lastname, String email) {
+  public About_usModel(Long id, String firstname, String lastname, int phonenumber, String email, String photo) {
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
+    this.phonenumber = phonenumber;
     this.email = email;
+    this.photo = photo;
   }
 
   public About_usModel() {

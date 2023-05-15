@@ -37,7 +37,9 @@ public class About_usService implements About_usService_impl {
     About_usModel existingAboutUsModel = about_usRepository.findById(about_usModel.getId()).get();
     existingAboutUsModel.setFirstname(about_usModel.getFirstname());
     existingAboutUsModel.setLastname(about_usModel.getLastname());
+    existingAboutUsModel.setPhonenumber(about_usModel.getPhonenumber());
     existingAboutUsModel.setEmail(about_usModel.getEmail());
+    existingAboutUsModel.setPhoto(about_usModel.getPhoto());
     About_usModel updatedAboutUsModel = about_usRepository.save(existingAboutUsModel);
     return updatedAboutUsModel;
   }
