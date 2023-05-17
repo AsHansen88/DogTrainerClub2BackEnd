@@ -17,12 +17,12 @@ public class TrailsAndAwardsController {
   private TrailsAndAwardsService trailsAndAwardsService;
 
 
-  @GetMapping(value = "/prøver")
+  @GetMapping(value = "/prover")
   public List<TrailsAndAwardsModel> TrailsAndAwards(){
     return trailsAndAwardsService.getAllTrailsAndAwards();
   }
 
-  @PostMapping(value = "/prøve")
+  @PostMapping(value = "/prove")
   public void publishTrailsAndAwards(@RequestBody TrailsAndAwardsModel trailsAndAwards){
     if (trailsAndAwards.getDateCreated() == null)
       trailsAndAwards.setDateCreated(new Date());
