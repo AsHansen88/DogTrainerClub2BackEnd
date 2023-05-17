@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("http://localhost:63342")
 @AllArgsConstructor
 @RequestMapping("Selection")
 public class SelectionController {
