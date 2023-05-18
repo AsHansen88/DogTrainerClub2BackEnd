@@ -90,7 +90,7 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
 
-    </dependencies>
+        </dependencies>
 
     <build>
         <plugins>
