@@ -57,4 +57,5 @@ public class SelectionModel {
   public void setEmail(String email) {
     this.email = email;
   }
+
 }
