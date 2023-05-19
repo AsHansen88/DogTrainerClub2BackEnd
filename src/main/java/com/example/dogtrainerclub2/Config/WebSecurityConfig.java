@@ -6,6 +6,7 @@ import com.example.dogtrainerclub2.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @EnableWebSecurity
 //@SuppressWarnings("deprecation")
@@ -65,8 +67,8 @@ public class WebSecurityConfig {
     http.cors().and().csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeHttpRequests().requestMatchers("/api/auth/**").permitAll()
-        .requestMatchers("/api/test/**").permitAll()
+        .authorizeHttpRequests().requestMatchers("/upload", "/posts", "/About").permitAll()
+        .requestMatchers("/files", "/posts", "/About").permitAll()
         .anyRequest().authenticated();
 
     http.authenticationProvider(authenticationProvider());
@@ -76,7 +78,10 @@ public class WebSecurityConfig {
     return http.build();
   }
 
-}
+   }
+
+
+
 
 
 
