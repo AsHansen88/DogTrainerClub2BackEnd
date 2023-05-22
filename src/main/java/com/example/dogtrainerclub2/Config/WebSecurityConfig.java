@@ -71,7 +71,7 @@ public class WebSecurityConfig {
         //posts
         .authorizeHttpRequests().requestMatchers("/api/auth/signup", "/api/auth/signin", "/upload", "/post", "About", "/image", "/Selection", "/prove").permitAll()
         //get
-        .requestMatchers("/api/test/admin", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover" ).permitAll()
+        .requestMatchers("/api/test/admin","/api/test/all", "/api/test/user", "/api/test/mod", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover" ).permitAll()
         .anyRequest().authenticated();
 
     http.authenticationProvider(authenticationProvider());
