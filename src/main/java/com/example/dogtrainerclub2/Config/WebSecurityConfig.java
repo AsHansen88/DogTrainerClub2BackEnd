@@ -2,6 +2,7 @@ package com.example.dogtrainerclub2.Config;
 
 import com.example.dogtrainerclub2.Security.AuthEntryPointJwt;
 import com.example.dogtrainerclub2.Security.AuthTokenFilter;
+import com.example.dogtrainerclub2.repository.RoleRepository;
 import com.example.dogtrainerclub2.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -67,8 +68,10 @@ public class WebSecurityConfig {
     http.cors().and().csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeHttpRequests().requestMatchers("/api/auth/signup", "upload", "post").permitAll()
-        .requestMatchers("/api/auth/signin", "files" ,"posts").permitAll()
+        //posts
+        .authorizeHttpRequests().requestMatchers("/api/auth/signup", "/api/auth/signin", "/upload", "/post", "About", "/image", "/Selection", "/prove").permitAll()
+        //get
+        .requestMatchers("/api/test/admin", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover" ).permitAll()
         .anyRequest().authenticated();
 
     http.authenticationProvider(authenticationProvider());
