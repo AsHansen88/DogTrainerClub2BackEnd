@@ -14,12 +14,15 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+
 
 @EnableWebSecurity
 //@SuppressWarnings("deprecation")
@@ -29,6 +32,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
     // securedEnabled = true,
     // jsr250Enabled = true,
     prePostEnabled = true)
+
+
 
 public class WebSecurityConfig {
 
@@ -64,14 +69,14 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  public SecurityFilterChain configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         //posts
-        .authorizeHttpRequests().requestMatchers("/api/auth/signup", "/api/auth/signin", "/upload", "/post", "About", "/image", "/Selection", "/prove").permitAll()
+        .authorizeHttpRequests().requestMatchers("/api/auth/signup", "/api/auth/signin", "/upload", "/post", "About", "/image","/image/info/{name}","/image/{name}", "/Selection", "/prove").permitAll()
         //get
-        .requestMatchers("/api/test/admin","/api/test/all", "/api/test/user", "/api/test/mod", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover" ).permitAll()
+        .requestMatchers("/api/test/all", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover", "image", "/image/info/{name}","/image/{name}").permitAll()
         .anyRequest().authenticated();
 
     http.authenticationProvider(authenticationProvider());
@@ -81,8 +86,9 @@ public class WebSecurityConfig {
     return http.build();
   }
 
-   }
 
+
+   }
 
 
 
