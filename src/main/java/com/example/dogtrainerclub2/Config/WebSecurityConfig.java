@@ -1,42 +1,31 @@
 package com.example.dogtrainerclub2.Config;
 
-import com.example.dogtrainerclub2.Controller.TestController;
 import com.example.dogtrainerclub2.Security.AuthEntryPointJwt;
 import com.example.dogtrainerclub2.Security.AuthTokenFilter;
-import com.example.dogtrainerclub2.repository.RoleRepository;
 import com.example.dogtrainerclub2.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
 
 
 
 @EnableWebSecurity
 //@SuppressWarnings("deprecation")
 @Configuration
-@EnableMethodSecurity(
-//@EnableGlobalMethodSecurity(
-    // securedEnabled = true,
-    // jsr250Enabled = true,
-    prePostEnabled = true)
-
-
-
-public class WebSecurityConfig {
+@EnableMethodSecurity
+    public class WebSecurityConfig {
 
   @Autowired
   UserDetailsServiceImpl userDetailsService;
@@ -85,7 +74,7 @@ public class WebSecurityConfig {
         .requestMatchers("/api/test/all").permitAll()
         .requestMatchers("/api/test/user").hasAnyRole("USER","MODERATOR", "ADMIN")
         .requestMatchers("/api/test/mod").hasRole("MODERATOR")
-        .requestMatchers("/api/test/admin", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover", "image", "/image/info/{name}","/image/{name}").hasRole("ADMIN")
+        .requestMatchers("/api/test/admin").hasRole("ADMIN")
 
         .anyRequest().authenticated();
 
