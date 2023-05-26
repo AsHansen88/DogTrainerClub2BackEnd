@@ -1,5 +1,6 @@
 package com.example.dogtrainerclub2.Config;
 
+import com.example.dogtrainerclub2.Controller.TestController;
 import com.example.dogtrainerclub2.Security.AuthEntryPointJwt;
 import com.example.dogtrainerclub2.Security.AuthTokenFilter;
 import com.example.dogtrainerclub2.repository.RoleRepository;
@@ -73,10 +74,19 @@ public class WebSecurityConfig {
     http.cors().and().csrf().disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        .authorizeHttpRequests()
+        //Signin/signup
+        .requestMatchers("/api/auth/signup", "/api/auth/signin").permitAll()
         //posts
-        .authorizeHttpRequests().requestMatchers("/api/auth/signup", "/api/auth/signin", "/upload", "/post", "About", "/image","/image/info/{name}","/image/{name}", "/Selection", "/prove").permitAll()
+        .requestMatchers("/upload", "/post", "/About", "/image","/image/info/{name}","/image/{name}", "/Selection", "/prove").permitAll()
         //get
-        .requestMatchers("/api/test/all", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover", "image", "/image/info/{name}","/image/{name}").permitAll()
+        .requestMatchers("/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover", "image", "/image/info/{name}","/image/{name}").permitAll()
+        //users
+        .requestMatchers("/api/test/all").permitAll()
+        .requestMatchers("/api/test/user").hasAnyRole("USER","MODERATOR", "ADMIN")
+        .requestMatchers("/api/test/mod").hasRole("MODERATOR")
+        .requestMatchers("/api/test/admin", "/files" ,"/posts", "/Selection/info/{name}","/Selection/{id}", "/prover", "image", "/image/info/{name}","/image/{name}").hasRole("ADMIN")
+
         .anyRequest().authenticated();
 
     http.authenticationProvider(authenticationProvider());
